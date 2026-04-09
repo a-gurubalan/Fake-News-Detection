@@ -1,33 +1,38 @@
 import pandas as pd
+from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 import joblib
 
-# Load data from CSV files
-fake_df = pd.read_csv("Fake.csv")
-true_df = pd.read_csv("True.csv")
+# Load data
+df_fake = pd.read_csv("Fake.csv")
+df_true = pd.read_csv("True.csv")
 
-# Add labels
-fake_df["label"] = 0  # Fake news
-true_df["label"] = 1  # Real news
+df_fake["label"] = 0
+df_true["label"] = 1
 
-# Combine datasets
-df = pd.concat([fake_df, true_df], ignore_index=True)
+df = pd.concat([df_fake, df_true])
+df = df.sample(frac=1)
 
-# Use the 'text' column for features
+# Use full text
 X = df["text"]
 y = df["label"]
 
-# Vectorize the text
-vectorizer = TfidfVectorizer()
-X_vec = vectorizer.fit_transform(X)
+# Split
+xtrain, xtest, ytrain, ytest = train_test_split(X, y, test_size=0.2)
 
-# Train the model
-model = LogisticRegression()
-model.fit(X_vec, y)
+# Vectorize
+vectorizer = TfidfVectorizer(stop_words='english')
+xtrain_vec = vectorizer.fit_transform(xtrain)
+xtest_vec = vectorizer.transform(xtest)
 
-# Save the model and vectorizer
+# Train model
+model = LogisticRegression(max_iter=1000)
+model.fit(xtrain_vec, ytrain)
+
+# Accuracy
+print("Accuracy:", model.score(xtest_vec, ytest))
+
+# Save
 joblib.dump(model, "lr_model.jb")
 joblib.dump(vectorizer, "vectorizer.jb")
-
-print("Model trained and saved successfully")
