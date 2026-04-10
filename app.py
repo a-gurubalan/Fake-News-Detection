@@ -14,9 +14,9 @@ st.sidebar.markdown("---")
 
 st.sidebar.markdown("""
 ### About
-AI-based fake news detection
+Fake news detector app
 
-### Instructions
+### Usage
 - Enter news  
 - Click button  
 - View result  
