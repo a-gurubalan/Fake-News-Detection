@@ -1,6 +1,8 @@
 import streamlit as st
 import joblib
 
+# 🔥 ADD LOGO HERE
+st.image("logo.png", width=250)
 st.title("Fake News Detector")
 
 try:
