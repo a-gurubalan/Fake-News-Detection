@@ -1,10 +1,27 @@
 import streamlit as st
 import joblib
 
-# 🔥 ADD LOGO HERE
-st.image("logo.png", width=250)
-st.title("Fake News Detector")
+# 🔥 SIDEBAR DESIGN
+st.sidebar.image("logo.png", width=200)
 
+st.sidebar.title("Fake News Detector")
+
+st.sidebar.markdown("""
+### About
+This app uses Machine Learning to classify news as:
+
+- ✅ Real News  
+- ❌ Fake News  
+
+### Model
+- Logistic Regression  
+- TF-IDF Vectorizer  
+
+### Usage
+1. Enter news article  
+2. Click **Check News**  
+3. See prediction + confidence  
+""")
 try:
     vectorizer = joblib.load("vectorizer.jb")
     model = joblib.load("lr_model.jb")
