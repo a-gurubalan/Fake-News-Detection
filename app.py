@@ -1,9 +1,6 @@
 import streamlit as st
 import joblib
 
-import streamlit as st
-import joblib
-
 st.set_page_config(page_title="Fake News Detector", layout="centered")
 
 # SIDEBAR
@@ -27,13 +24,16 @@ st.sidebar.write("Made by Gurubalan 🚀")
 
 # MAIN PAGE
 st.title("📰 Fake News Detector")
-st.write("Check whether a news article is real or fake") 
+st.write("Check whether a news article is real or fake")
 
+st.markdown("""
 ### Usage
 1. Enter news article  
 2. Click **Check News**  
 3. See prediction + confidence  
 """)
+
+# LOAD MODEL
 try:
     vectorizer = joblib.load("vectorizer.jb")
     model = joblib.load("lr_model.jb")
