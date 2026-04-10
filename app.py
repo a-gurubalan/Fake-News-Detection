@@ -43,15 +43,18 @@ except Exception as e:
 
 news_input = st.text_area("News Article:")
 
-if st.button("check News"):
+if st.button("Check News"):
     if news_input.strip():
-        transform_input = vectorizer.transform([news_input])
-        prediction = model.predict(transform_input)
 
-        proba = model.predict_proba(transform_input)
-        real_prob = proba[0][1] * 100
-        fake_prob = proba[0][0] * 100
+        with st.spinner("Analyzing news..."):
+            transform_input = vectorizer.transform([news_input])
+            prediction = model.predict(transform_input)
 
+            proba = model.predict_proba(transform_input)
+            real_prob = proba[0][1] * 100
+            fake_prob = proba[0][0] * 100
+
+        # 👇 OUTSIDE spinner (important)
         if prediction[0] == 1:
             st.success("The News is Real! ✅")
         else:
