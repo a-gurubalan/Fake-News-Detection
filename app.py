@@ -1,21 +1,33 @@
 import streamlit as st
 import joblib
 
-# 🔥 SIDEBAR DESIGN
-st.sidebar.image("logo.png", width=200)
+import streamlit as st
+import joblib
 
-st.sidebar.title("Fake News Detector")
+st.set_page_config(page_title="Fake News Detector", layout="centered")
+
+# SIDEBAR
+st.sidebar.image("logo.png", use_container_width=True)
+st.sidebar.title("📰 Fake News Detector")
+
+st.sidebar.markdown("---")
 
 st.sidebar.markdown("""
 ### About
-This app uses Machine Learning to classify news as:
+AI-based fake news detection
 
-- ✅ Real News  
-- ❌ Fake News  
+### Instructions
+- Enter news  
+- Click button  
+- View result  
+""")
 
-### Model
-- Logistic Regression  
-- TF-IDF Vectorizer  
+st.sidebar.markdown("---")
+st.sidebar.write("Made by Gurubalan 🚀")
+
+# MAIN PAGE
+st.title("📰 Fake News Detector")
+st.write("Check whether a news article is real or fake") 
 
 ### Usage
 1. Enter news article  
